@@ -1,0 +1,17 @@
+{
+    "name": "antonisgr/oophpmvc",
+    "description": "A tiny and simple PHP OO MVC framework to learn coding better",
+    "license": "MIT",
+    "keywords": ["mvc", "php", "oop"],
+    "authors": [
+        {
+            "name": "Antonis Grigoriadis",
+            "email": "grigant12@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "Oophpmvc\\": "src"
+        }
+    }
+}
