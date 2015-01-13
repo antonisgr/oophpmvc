@@ -2,7 +2,16 @@
 
 class Router
 {
+    /**
+     * Holds all registered routes.
+     * @var array
+     */
     private $registeredRoutes = [];
+
+    /**
+     * Holds the closures (1 to 1 relationship with routes).
+     * @var array
+     */
     private $registeredClosures = [];
 
     /**
@@ -16,6 +25,12 @@ class Router
         $this->registeredClosures[] = $function;
     }
 
+    /**
+     * The actual routing happens here.
+     * This method checks if the uri is a registered route, and if it is,
+     * it calls the analogous closure.
+     * @throws \Exception
+     */
     public function run()
     {
         $uri = isset($_REQUEST['uri']) ? $_REQUEST['uri'] : '/';

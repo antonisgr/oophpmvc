@@ -4,8 +4,17 @@ use PDO;
 
 class Database
 {
+    /**
+     * The connection object.
+     * @var null|PDO
+     */
     private $connection = null;
 
+    /**
+     * @param $dsn
+     * @param string $user
+     * @param string $pass
+     */
     public function __construct($dsn, $user = '', $pass = '')
     {
         $this->connection = new PDO($dsn, $user, $pass);
@@ -13,6 +22,13 @@ class Database
         $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); //throw exceptions
     }
 
+    /**
+     * Performs an SQL SELECT.
+     * @param $table
+     * @param array $columns
+     * @param string $id
+     * @return array
+     */
     public function select($table, array $columns = [], $id = '')
     {
         if (empty($columns)) {
@@ -33,7 +49,6 @@ class Database
 
     /**
      * Select everything from a given table.
-     *
      * @return array
      */
     public function selectAll($table)
@@ -43,6 +58,11 @@ class Database
         return $stmt->fetchAll();
     }
 
+    /**
+     * Performs an SQL INSERT.
+     * @param $table
+     * @param array $data
+     */
     public function insert($table, array $data)
     {
         $sql = "INSERT INTO $table (" . implode(', ', array_keys($data)) . ") VALUES (";
@@ -59,6 +79,13 @@ class Database
         $stmt->execute($binds);
     }
 
+    /**
+     * Performs an SQL UPDATE.
+     * @param $table
+     * @param array $data
+     * @param $id
+     * @throws \Exception
+     */
     public function update($table, array $data, $id)
     {
         if (empty($id)) throw new \Exception('Specify a where clause');
@@ -77,6 +104,11 @@ class Database
         $stmt->execute($binds);
     }
 
+    /**
+     * Performs an SQL DELETE.
+     * @param $table
+     * @param $id
+     */
     public function delete($table, $id)
     {
         $sql = "DELETE FROM $table WHERE id = :id";
