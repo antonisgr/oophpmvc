@@ -4,6 +4,6 @@ class Controller
 {
     public function home()
     {
-        echo 'Hello controller\'s home!';
+        return 'Hello controller\'s home!';
     }
 }
